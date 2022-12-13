@@ -1,9 +1,8 @@
 version: '3.0'
-name: spacie
 services:
-  spacie_database:
+  arashop_database:
     image: postgres
-    container_name: spacie_database
+    container_name: arashop_database
     environment:
       POSTGRES_DB: ${PG_DB_NAME}
       POSTGRES_PASSWORD: ${PG_PASSWORD}
