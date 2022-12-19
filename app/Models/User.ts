@@ -37,7 +37,12 @@ export default class User extends BaseModel {
     pivotRelatedForeignKey: 'item_id',
     pivotTable: 'user_items',
   })
-  public items: ManyToMany<typeof Item>
+  public savedItems: ManyToMany<typeof Item>
+
+  @hasMany(()=>Item,{
+    localKey:"id"
+  })
+  public createdItems: HasMany<typeof Item>
 
   @column({ serializeAs: null })
   public password: string

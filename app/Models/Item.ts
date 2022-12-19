@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import User from './User'
 
 export default class Item extends BaseModel {
@@ -8,6 +8,9 @@ export default class Item extends BaseModel {
 
   @column()
   public name: string
+
+  @column()
+  public userId:number
 
   @column()
   public price: number
@@ -25,6 +28,11 @@ export default class Item extends BaseModel {
     pivotColumns: ['quantity', 'status'],
   })
   public users: ManyToMany<typeof User>
+
+  @belongsTo(()=>User, {
+    foreignKey: "userId"
+  })
+  public user: BelongsTo<typeof User>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
