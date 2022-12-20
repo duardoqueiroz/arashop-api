@@ -1,10 +1,6 @@
 import Route from '@ioc:Adonis/Core/Route'
 import './routes/google'
 
-Route.get('/', async () => {
-  return { hello: 'world' }
-})
-
 Route.post('/login', 'AuthController.store')
 Route.post('/logout', 'AuthController.destroy')
 Route.resource('/users', 'UsersController')

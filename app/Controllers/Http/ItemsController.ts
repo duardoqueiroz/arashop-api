@@ -12,9 +12,9 @@ export default class ItemsController {
     return response.ok(items)
   }
 
-  public async store({ request, response,auth }: HttpContextContract) {
+  public async store({ request, response, auth }: HttpContextContract) {
     const data = await request.validate(StoreValidator)
-    const item = await auth.user!.related("createdItems").create(data)
+    const item = await auth.user!.related('createdItems').create(data)
     return response.created(item)
   }
 
@@ -23,6 +23,8 @@ export default class ItemsController {
     if (!item) {
       return response.notFound({ message: 'Item não encontrado' })
     }
+    await item.load('user')
+    await item.load('users')
     return response.ok(item)
   }
 
@@ -37,9 +39,9 @@ export default class ItemsController {
     return response.ok(item)
   }
 
-  public async destroy({ params, response,auth }: HttpContextContract) {
-    await auth.user!.load("createdItems")    
-    const item = auth.user!.createdItems.find((i)=>+i.id === +params.id)
+  public async destroy({ params, response, auth }: HttpContextContract) {
+    await auth.user!.load('createdItems')
+    const item = auth.user!.createdItems.find((i) => +i.id === +params.id)
     if (!item) {
       return response.notFound({ message: 'Item não encontrado' })
     }

@@ -25,6 +25,9 @@ export default class UsersController {
     if (!user) {
       return response.notFound({ message: 'Usuário não encontrado' })
     }
+    await user.load('addresses')
+    await user.load('createdItems')
+    await user.load('savedItems')
     return response.ok(user)
   }
 

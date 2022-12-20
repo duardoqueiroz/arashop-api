@@ -25,9 +25,6 @@ export default class User extends BaseModel {
   @column()
   public phone: string
 
-  @column()
-  public isAdm: boolean
-
   @hasMany(() => Address)
   public addresses: HasMany<typeof Address>
 
@@ -39,8 +36,8 @@ export default class User extends BaseModel {
   })
   public savedItems: ManyToMany<typeof Item>
 
-  @hasMany(()=>Item,{
-    localKey:"id"
+  @hasMany(() => Item, {
+    localKey: 'id',
   })
   public createdItems: HasMany<typeof Item>
 
