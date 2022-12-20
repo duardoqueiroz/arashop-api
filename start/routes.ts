@@ -17,7 +17,7 @@ Route.resource('items', 'ItemsController')
     update: ['auth'],
     store: ['auth'],
   })
-Route.resource('users.items', 'UsersItemsController')
+Route.resource('users.items', 'UserItemsController')
   .apiOnly()
   .middleware({
     '*': ['auth'],
