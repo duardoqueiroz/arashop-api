@@ -13,6 +13,7 @@ export default class extends BaseSchema {
       table.enum('status', [ITEM_STATUS.BOUGHT, ITEM_STATUS.SAVED]).notNullable()
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
+      table.primary(['user_id', 'item_id', 'status'])
     })
   }
 

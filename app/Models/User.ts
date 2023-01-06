@@ -11,6 +11,7 @@ import {
 } from '@ioc:Adonis/Lucid/Orm'
 import Address from './Address'
 import Item from './Item'
+import { ITEM_STATUS } from 'Contracts/enums/ITEM_STATUS'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -33,6 +34,9 @@ export default class User extends BaseModel {
     pivotForeignKey: 'user_id',
     pivotRelatedForeignKey: 'item_id',
     pivotTable: 'user_items',
+    onQuery(query) {
+      query.where('status', ITEM_STATUS.SAVED)
+    },
   })
   public savedItems: ManyToMany<typeof Item>
 
