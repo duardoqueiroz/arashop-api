@@ -7,6 +7,7 @@ export default class AuthController {
       const { email, password } = request.all()
       const token = await auth.attempt(email, password, { expiresIn: '7days' })
       let user: User = token.user
+      await user.load('addresses')
       return response.ok({ user, token })
     } catch (error) {
       return response.unauthorized({ message: 'Falha na autenticação', error })

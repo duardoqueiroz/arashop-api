@@ -40,6 +40,17 @@ export default class User extends BaseModel {
   })
   public savedItems: ManyToMany<typeof Item>
 
+  @manyToMany(() => Item, {
+    pivotColumns: ['quantity', 'status'],
+    pivotForeignKey: 'user_id',
+    pivotRelatedForeignKey: 'item_id',
+    pivotTable: 'user_items',
+    onQuery(query) {
+      query.where('status', ITEM_STATUS.BOUGHT)
+    },
+  })
+  public purchasedItems: ManyToMany<typeof Item>
+
   @hasMany(() => Item, {
     localKey: 'id',
   })

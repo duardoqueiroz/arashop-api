@@ -19,5 +19,21 @@ export default class extends BaseSeeder {
       price: 100,
       userId: 1,
     })
+    await Item.create({
+      name: 'Camisa da copa',
+      description: 'N possui nome do mininu ney nas costas :(',
+      imageUrl:
+        'https://a-static.mlcdn.com.br/800x560/camisa-brasil-oficial-amarelo-selecao-brasileiras-original-cbf/vidapeshop/aj5026g/48dc8e33ec5c3aef1f7502fc835824b5.jpeg',
+      price: 100,
+      userId: 1,
+    })
+    await Item.create({
+      name: 'Figurinha da copa',
+      description: 'É a do mininu ney :)',
+      imageUrl:
+        'https://classic.exame.com/wp-content/uploads/2022/08/neymar_-_figurinha.jpg?quality=70&strip=info&w=1024',
+      price: 100,
+      userId: 1,
+    })
   }
 }

@@ -15,7 +15,7 @@ export default class StoreValidator {
     addresses: schema.array.optional().members(
       schema.object().members({
         street: schema.string({}, [rules.required()]),
-        houseNumber: schema.number([rules.required()]),
+        houseNumber: schema.string({}, [rules.required()]),
         zipCode: schema.string({}, [rules.required()]),
         district: schema.string({}, [rules.required()]),
       })

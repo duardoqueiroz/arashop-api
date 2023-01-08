@@ -15,7 +15,7 @@ export default class extends BaseSchema {
         .onDelete('CASCADE')
         .onUpdate('CASCADE')
       table.string('street').notNullable()
-      table.integer('house_number').notNullable()
+      table.string('house_number').notNullable()
       table.string('zip_code').notNullable()
       table.string('district').notNullable()
       table.timestamp('created_at', { useTz: true })

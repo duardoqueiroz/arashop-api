@@ -6,7 +6,11 @@ export default class UserItemsController {
   public async index({ response, params, auth }: HttpContextContract) {
     console.log(auth.user)
     await auth.user!.load('savedItems')
-    return response.ok(auth.user!.savedItems)
+    await auth.user!.load('purchasedItems')
+    return response.ok({
+      saved_items: auth.user!.savedItems,
+      purshased_items: auth.user!.purchasedItems,
+    })
   }
 
   public async store({ response, request, auth }: HttpContextContract) {
@@ -42,5 +46,15 @@ export default class UserItemsController {
       return response.notFound('Item não encontrado!')
     }
     return response.ok(item)
+  }
+
+  public async destroy({ response, params, auth }: HttpContextContract) {
+    await auth.user!.load('savedItems')
+    const item = auth.user!.savedItems.find((i) => +i.id === +params.id)
+    if (!item) {
+      return response.notFound('Item não encontrado!')
+    }
+    await auth.user!.related('savedItems').detach([item.id])
+    return response.ok('Ok!')
   }
 }
