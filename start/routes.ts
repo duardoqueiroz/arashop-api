@@ -17,8 +17,13 @@ Route.resource('items', 'ItemsController')
     update: ['auth'],
     store: ['auth'],
   })
-Route.resource('users.items', 'UserItemsController')
+Route.resource('users.items', 'CartItemsController')
   .apiOnly()
   .middleware({
     '*': ['auth'],
   })
+Route.get('/users/:id/saved-items', 'SavedItemsController.index').middleware('auth')
+Route.get('/users/:id/saved-items/:item_id', 'SavedItemsController.show').middleware('auth')
+Route.post('/users/:id/saved-items', 'SavedItemsController.store').middleware('auth')
+Route.delete('/users/:id/saved-items/:item_id', 'SavedItemsController.destroy').middleware('auth')
+Route.post('/users/:id/bought-items', 'BoughtItemsController.store').middleware('auth')

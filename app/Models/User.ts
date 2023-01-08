@@ -30,13 +30,9 @@ export default class User extends BaseModel {
   public addresses: HasMany<typeof Address>
 
   @manyToMany(() => Item, {
-    pivotColumns: ['quantity', 'status'],
     pivotForeignKey: 'user_id',
     pivotRelatedForeignKey: 'item_id',
-    pivotTable: 'user_items',
-    onQuery(query) {
-      query.where('status', ITEM_STATUS.SAVED)
-    },
+    pivotTable: 'saved_items',
   })
   public savedItems: ManyToMany<typeof Item>
 
@@ -50,6 +46,17 @@ export default class User extends BaseModel {
     },
   })
   public purchasedItems: ManyToMany<typeof Item>
+
+  @manyToMany(() => Item, {
+    pivotColumns: ['quantity', 'status'],
+    pivotForeignKey: 'user_id',
+    pivotRelatedForeignKey: 'item_id',
+    pivotTable: 'user_items',
+    onQuery(query) {
+      query.where('status', ITEM_STATUS.CART)
+    },
+  })
+  public cartItems: ManyToMany<typeof Item>
 
   @hasMany(() => Item, {
     localKey: 'id',

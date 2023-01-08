@@ -23,8 +23,6 @@ export default class ItemsController {
     if (!item) {
       return response.notFound({ message: 'Item não encontrado' })
     }
-    await item.load('user')
-    await item.load('users')
     return response.ok(item)
   }
 
