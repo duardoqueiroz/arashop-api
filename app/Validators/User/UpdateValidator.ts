@@ -18,7 +18,7 @@ export default class UpdateValidator {
     addresses: schema.array.optional().members(
       schema.object().members({
         street: schema.string.optional({}, []),
-        houseNumber: schema.number.optional([]),
+        houseNumber: schema.string.optional({}, []),
         zipCode: schema.string.optional({}, []),
         district: schema.string.optional({}, []),
       })

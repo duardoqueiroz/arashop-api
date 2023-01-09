@@ -38,6 +38,16 @@ export default class UsersController {
       return response.notFound({ message: 'Usuário não encontrado' })
     }
     user.merge(data)
+    await user.related('addresses').updateOrCreate(
+      {},
+      {
+        district: (data.addresses && data.addresses[0].district) || '',
+        houseNumber: (data.addresses && data.addresses[0].houseNumber) || '',
+        street: (data.addresses && data.addresses[0].street) || '',
+        zipCode: (data.addresses && data.addresses[0].zipCode) || '',
+        userId: user.id,
+      }
+    )
     await user.save()
     return response.ok(user)
   }
